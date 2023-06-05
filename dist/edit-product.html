@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add Product - Dashboard HTML Template</title>
+    <script defer src="./bundle.js"></script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- CSS -->
+
+
+<!-- JS, Popper.js, and jQuery -->
+
+    
+</head>
+<body>
+  <nav class="navbar navbar-expand-xl">
+    <div class="container h-100">
+      <button
+        class="navbar-toggler ml-auto mr-0"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars tm-nav-icon"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto h-100">
+          <li class="nav-item">
+            <a class="nav-link active" href="products.html">
+              <i class="fas fa-shopping-cart"></i> Clothes
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown1"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown2"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="tm-block-title d-inline-block">Edit Clothes</h2>
+              </div>
+            </div>
+            <div class="row tm-edit-product-row">
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <form id="addForm" class="tm-edit-product-form">
+                  <div class="form-group mb-3">
+                    <label for="clothesCategory">Clothes Category</label>
+                    <select class="custom-select tm-select-accounts" id="edtclothes">
+                      <option selected>Select Clothes Category</option>
+                      <option value="Top">Top</option>
+                      <option value="Bottom">Bottom</option>
+                      <option value="FootWear">Foot wear</option>
+                      <option value="All">All</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="weather">Weather Condition</label>
+                    <select class="custom-select tm-select-accounts" id="edtweather" name="weather">
+                      <option selected>Select weather condition</option>
+                      <option value="Clear sky">Clear sky</option>
+                      <option value="Few clouds">Few clouds</option>
+                      <option value="Scattered clouds">Scattered clouds</option>
+                      <option value="Broken clouds">Broken clouds</option>
+                      <option value="Shower rain">Shower rain</option>
+                      <option value="Rain">Rain</option>
+                      <option value="Thunderstorm">Thunderstorm</option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="outfit">Outfit</label>
+                      <select class="custom-select tm-select-accounts" id="edtoutfit" name="outfit">
+                        <option selected>Select Outfit</option>
+                        <option value="SunnyComfort">SunnyComfort</option>
+                        <option value="LightLayers">LightLayers</option>
+                        <option value="CloudyWarmth">CloudyWarmth</option>
+                        <option value="CloudyCover">CloudyCover</option>
+                        <option value="LightRainGear">LightRainGear</option>
+                        <option value="RainyProtection">RainyProtection</option>
+                        <option value="ThunderstormSafety">ThunderstormSafety</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="stock">Units In Stock</label>
+                      <input id="edtstock" type="number" class="form-control validate"/>
+                    </div>
+                  </div>
+              
+                </div>
+                <div class="col-lg-6">
+                  <!-- New description field here -->
+              
+                  <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="edtdescription" rows="3" maxlength="100"></textarea>
+                  </div>   
+                    </div>
+                     </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary btn-block text-uppercase update" id="editBtn" data-id="{{documentId}}">Edit Clothes Now</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+    import { getFirestore, doc, setDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyCmnqjXlksqhtHumP8WyKcTMsJ_hY7ys2E",
+        authDomain: "faheemfirebase-7e868.firebaseapp.com",
+        projectId: "faheemfirebase-7e868",
+        storageBucket: "faheemfirebase-7e868.appspot.com",
+        messagingSenderId: "804165468060",
+        appId: "1:804165468060:web:a6f9a3c79013605c9dd259",
+        measurementId: "G-FEG0FPGY1W"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+  
+    const documentId = getQueryParam('id');
+
+    document.addEventListener("DOMContentLoaded", function() {
+        if(documentId){
+            document.getElementById('editBtn').addEventListener('click', async(event)=>{
+                event.preventDefault();
+                try{
+                    let clothes = document.getElementById('edtclothes').value;
+                    let weather = document.getElementById('edtweather').value;
+                    let outfit = document.getElementById('edtoutfit').value;
+                    let stock = document.getElementById('edtstock').value;
+                    let description = document.getElementById('edtdescription').value;
+
+                    // Update the document in Firestore
+                    const docRef = doc(db, "clothes", documentId);
+                    const docSnap = await getDoc(docRef);
+
+                    if (!docSnap.exists()) {
+                        throw new Error('No such document!');
+                    } else {
+                        await updateDoc(docRef, {
+                            clothes: clothes,
+                            description: description,
+                            outfit : outfit,
+                            stock: stock,
+                            weather: weather
+                        });
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: "success",
+                            title: "Success",
+                            text:"Report updated successfully"
+                        });
+                    }
+                }catch(error){
+                    console.error(error);
+                    Swal.fire({
+                        position: 'bottom-end',
+                        icon: "error",
+                        title: "Error",
+                        text: error.message
+                    });
+                }
+            });
+        } else {
+            console.log("No document ID found in the URL!");
+            Swal.fire({
+                position: 'bottom-end',
+                icon: "error",
+                title: "Error",
+                text:"No document ID found in the URL!"
+            });
+        }
+    });
+</script>
+
+
+<script>
+  $(document).ready(function(){
+      var $weather = $('#edtweather');
+      var $outfit = $('#edtoutfit');
+  
+      if ($weather.length && $outfit.length) {
+          $weather.change(function(){
+              var selectedWeather = $(this).children("option:selected").val();
+              switch(selectedWeather){
+                case 'Clear sky':
+                    $outfit.val('SunnyComfort'); // Selects "SunnyComfort"
+                    break;
+                case 'Few clouds':
+                    $outfit.val('LightLayers'); // Selects "LightLayers"
+                    break;
+                case 'Scattered clouds':
+                    $outfit.val('CloudyWarmth'); // Selects "CloudyWarmth"
+                    break;
+                case 'Broken clouds':
+                    $outfit.val('CloudyCover'); // Selects "CloudyCover"
+                    break;
+                case 'Shower rain':
+                    $outfit.val('LightRainGear'); // Selects "LightRainGear"
+                    break;
+                case 'Rain':
+                    $outfit.val('RainyProtection'); // Selects "RainyProtection"
+                    break;
+                case 'Thunderstorm':
+                    $outfit.val('ThunderstormSafety'); // Selects "ThunderstormSafety"
+                    break;
+                default:
+                    console.error('Selected weather not found');
+                    break;
+              }
+          });
+      } else {
+          console.error('Element not found');
+      }
+  });
+</script>
+
+
+</body>
+</html> 

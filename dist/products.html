@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Product Page - Admin HTML Template</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+    />
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  </head>
+
+  <body id="reportsPage">
+    <nav class="navbar navbar-expand-xl">
+      <div class="container h-100">
+        <a class="navbar-brand" href="home.html">
+          <h1 class="tm-site-title mb-0">WeatherWardrobe</h1>
+        </a>
+        <button
+          class="navbar-toggler ml-auto mr-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto h-100">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="products.html">
+                <i class="fas fa-shopping-cart"></i> Clothes
+              </a>
+            </li>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link d-block" href="login.html">
+                Admin, <b>Logout</b>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="row tm-content-row d-flex justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-products">
+            <div class="tm-product-table-container">
+              <table class="table table-hover tm-table-small tm-product-table">
+                <thead>
+                  <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Weather Condition</th>
+                    <th scope="col">Outfit</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Functionality</th>
+                    <th scope="col">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be appended here using JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <!-- table container -->
+            <a
+              href="add-product.html"
+              class="btn btn-primary btn-block text-uppercase mb-3">Add Clothes</a>
+          </div>
+        </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script type = "module">
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js';
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = { 
+  apiKey: "AIzaSyCmnqjXlksqhtHumP8WyKcTMsJ_hY7ys2E",
+  authDomain: "faheemfirebase-7e868.firebaseapp.com",
+  projectId: "faheemfirebase-7e868",
+  storageBucket: "faheemfirebase-7e868.appspot.com",
+  messagingSenderId: "804165468060",
+  appId: "1:804165468060:web:a6f9a3c79013605c9dd259",
+  measurementId: "G-FEG0FPGY1W"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.onload = async function() {
+  const querySnapshot = await getDocs(collection(db, "clothes"));
+  querySnapshot.forEach((documentSnapshot) => {  // Rename 'doc' to 'documentSnapshot'
+    var data = documentSnapshot.data();
+
+    var table = document.querySelector('.tm-product-table tbody');
+    var row = document.createElement('tr');
+
+    // Delete icon
+    var deleteIconCell = document.createElement('td');
+    var deleteButton = document.createElement('a');
+    deleteButton.href = "#";
+    deleteButton.setAttribute('data-id', documentSnapshot.id); 
+    deleteButton.classList.add('tm-product-delete-link');
+    var deleteIcon = document.createElement('i');
+    deleteIcon.classList.add('far', 'fa-trash-alt', 'tm-product-delete-icon');
+    deleteButton.appendChild(deleteIcon);
+
+    deleteButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation(); 
+    const docId = this.getAttribute('data-id');
+    console.log("Delete button clicked. Document ID:", docId); 
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this document!",
+        icon: "warning",
+        buttons: ["Cancel", "Delete"],
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+            console.log("Deleting document ID:", docId);
+            deleteDoc(doc(db, "clothes", docId)).then(() => {
+                console.log("DeleteDoc promise resolved."); 
+                console.log("Document deleted successfully"); 
+                swal({
+                    title: "Success!",
+                    text: "Deleted Successfully",
+                    icon: "success",
+                    button: "OK",
+                }).then(() => {
+                    window.location.reload();
+                });
+            }).catch((error) => {
+                console.log("DeleteDoc promise rejected."); 
+                console.error("Error removing document: ", error);
+            });
+        }
+    });
+});
+deleteIconCell.appendChild(deleteButton);
+
+    // Weather
+    var weatherCell = document.createElement('td');
+    weatherCell.textContent = data.weather;
+    weatherCell.style.cursor = 'pointer';
+    weatherCell.addEventListener('click', function() {
+    window.location.href = `edit-product.html?id=${documentSnapshot.id}`;
+});
+
+
+    // Outfit
+    var outfitCell = document.createElement('td');
+    outfitCell.textContent = data.outfit;
+
+    // Category (corresponds to 'clothes' field in Firestore)
+    var categoryCell = document.createElement('td');
+    categoryCell.textContent = data.clothes;
+
+    // Stock
+    var stockCell = document.createElement('td');
+    stockCell.textContent = data.stock;
+
+    // Functionality
+    var functionalityCell = document.createElement('td');
+    functionalityCell.textContent = data.description;
+
+
+     row.appendChild(deleteIconCell);
+    row.appendChild(weatherCell);
+    row.appendChild(outfitCell);
+    row.appendChild(categoryCell);
+    row.appendChild(stockCell);
+    row.appendChild(functionalityCell);
+
+    table.appendChild(row);
+  });
+};
+
+table.addEventListener('click', async function(e) {
+    if (e.target.classList.contains('tm-product-delete-icon')) {
+      const docId = e.target.getAttribute('data-id');
+      await deleteDoc(doc(db, "clothes", docId));
+      window.location.reload();
+    }
+  });
+
+
+    
+</script>
+  <script>
+      $(function() {
+        $(".tm-product-name").on("click", function() {
+          window.location.href = "edit-product.html";
+        });
+      });
+    </script>
+  </body>
+</html>
